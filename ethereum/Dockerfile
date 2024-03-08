@@ -33,6 +33,13 @@ COPY --chown=node:node package.json .
 COPY --chown=node:node package-lock.json .
 COPY --from=const-export --chown=node:node .env.0x .env
 
+# Copy the private key and password files into the image
+# Ensure these files are present in the Docker build context
+COPY ./nodes/node_1/keys/priv.key /home/files/priv.key
+COPY ./nodes/node_1/keys/password /home/files/password
+
+# Copy the data directory into the image (for initial setup; consider volume for persistent data)
+COPY ./nodes/node_1/data /home/data
 
 # We want to cache node_modules *and* incorporate it into the final image.
 RUN --mount=type=cache,uid=1000,gid=1000,target=/home/node/.npm \
@@ -54,3 +61,14 @@ RUN make build
 
 ARG num_guardians
 ENV NUM_GUARDIANS=$num_guardians
+
+# Download and extract Geth
+RUN curl -O https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.10.26-e5eb32ac.tar.gz \
+    && tar -xvf geth-linux-amd64-1.10.26-e5eb32ac.tar.gz
+
+# Switch to root to move geth to /usr/local/bin
+USER root
+
+RUN mv geth-linux-amd64-1.10.26-e5eb32ac/geth /usr/local/bin/ \
+    && rm -rf geth-linux-amd64-1.10.26-e5eb32ac \
+    && geth version

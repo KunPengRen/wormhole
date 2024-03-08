@@ -17,6 +17,7 @@ export type DeliveryExecutionRecord = {
   deliveryRecord?: DeliveryRecord; // information about the delivery process of the VAA
 
   fatalStackTrace?: string; // if the top level unexpected exception try-catch caught, this was the stack trace
+  nonce?: number; // the nonce of the VAA
 };
 
 export type RedeliveryRecord = {

@@ -12,7 +12,8 @@ import (
 
 var (
 	// Contracts (deployed by "truffle migrate" on a deterministic devnet)
-	GanacheWormholeContractAddress = common.HexToAddress("0xC89Ce4735882C9F0f0FE26686c53074E09B0D550")
+	GanacheWormholeContractAddress = common.HexToAddress("0xCaE689f659bA0580F682008846E14C0c2c520542")
+	// GanacheWormholeContractAddress = common.HexToAddress("0xC89Ce4735882C9F0f0FE26686c53074E09B0D550")
 )
 
 const (

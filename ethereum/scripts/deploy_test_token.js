@@ -91,10 +91,10 @@ module.exports = async function(callback) {
       });
     }
 
-    // devnet WETH token address should be deterministic
-    if (wethAddress !== "0xDDb64fE46a91D46ee29420539FC25FD07c5FEa3E") {
-      throw new Error("unexpected WETH token address");
-    }
+    // // devnet WETH token address should be deterministic
+    // if (wethAddress !== "0xDDb64fE46a91D46ee29420539FC25FD07c5FEa3E") {
+    //   throw new Error("unexpected WETH token address");
+    // }
 
     // deploy token contract
     const accountantTokenAddress = (

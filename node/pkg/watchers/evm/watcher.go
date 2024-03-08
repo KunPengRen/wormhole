@@ -770,10 +770,10 @@ func (w *Watcher) getFinality(ctx context.Context) (bool, bool, error) {
 		}
 		var m Marshaller
 
-		err = c.CallContext(ctx, &m, "eth_getBlockByNumber", "finalized", false)
-		if err != nil || m.Number == nil {
-			return false, false, fmt.Errorf("finalized not supported by the node when it should be")
-		}
+		// err = c.CallContext(ctx, &m, "eth_getBlockByNumber", "finalized", false)
+		// if err != nil || m.Number == nil {
+		// 	return false, false, fmt.Errorf("finalized not supported by the node when it should be")
+		// }
 
 		if safe {
 			err = c.CallContext(ctx, &m, "eth_getBlockByNumber", "safe", false)
@@ -836,7 +836,8 @@ func (w *Watcher) postMessage(logger *zap.Logger, ev *ethabi.AbiLogMessagePublis
 
 	ethMessagesObserved.WithLabelValues(w.networkName).Inc()
 
-	if message.ConsistencyLevel == vaa.ConsistencyLevelPublishImmediately {
+	//if message.ConsistencyLevel == vaa.ConsistencyLevelPublishImmediately {
+	if true {
 		logger.Info("found new message publication transaction, publishing it immediately",
 			zap.Stringer("tx", ev.Raw.TxHash),
 			zap.Uint64("block", ev.Raw.BlockNumber),

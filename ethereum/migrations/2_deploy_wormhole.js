@@ -28,7 +28,8 @@ module.exports = async function (deployer) {
         governanceContract,
         evmChainId
     ).encodeABI();
-
+    console.log(`chainId`, chainId);
+    console.log(`evmChainId: ${evmChainId}`);
     // deploy proxy
     await deployer.deploy(Wormhole, Setup.address, initData);
 };
